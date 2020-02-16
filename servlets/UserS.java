@@ -24,9 +24,10 @@ public class UserS extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String mdp = request.getParameter("mdp");
+		String pseudo = request.getParameter("pseudo");
 		response.setContentType("json");
 		try {
-			response.getWriter().println(services.User.createUser(login, mdp).toString());
+			response.getWriter().println(services.User.createUser(login, mdp, pseudo).toString());
 		} catch (JSONException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -16,7 +16,7 @@ public class User {
 		
 		Connection c = Database.getMySQLConnection();
 		
-		if(!(tools.UserTools.UserExists(login, c))){
+		if(!(tools.UserTools.UserLoginExists(login, c))){
 			return tools.ErrorJSON.serviceRefused("User does not exist", -1);
 		}
 		
@@ -31,18 +31,18 @@ public class User {
 		return tools.ErrorJSON.serviceAccepted();
 	}
 	
-	public static JSONObject createUser(String login, String mdp) throws JSONException, SQLException {
-		if( (login == null) || (mdp == null)) {
+	public static JSONObject createUser(String login, String mdp, String pseudo) throws JSONException, SQLException {
+		if( (login == null) || (mdp == null) || (pseudo == null) || (login.length() < 3) || (mdp.length() < 3) || (pseudo.length() < 3)) {
 			return tools.ErrorJSON.serviceRefused("Wrong Arguments", -1);
 		}
 		
 		Connection c = Database.getMySQLConnection();
 		
-		if((tools.UserTools.UserExists(login, c))){
+		if((tools.UserTools.UserLoginExists(login, c))){
 			return tools.ErrorJSON.serviceRefused("User exists already", -1);
 		}	
 		
-		if(UserTools.insertUser(login, mdp, c)) {
+		if(UserTools.insertUser(login, mdp, pseudo, c)) {
 			return tools.ErrorJSON.serviceAccepted();
 		}
 		c.close();

@@ -1,11 +1,22 @@
 package test;
 import java.sql.SQLException;
+import java.sql.*;
 
 import org.json.JSONException;
 
 import services.User;
+import tools.UserTools;
 public class TestUser {
 	public static void main(String [] args) throws JSONException, SQLException {
-		User.createUser("momolegros", "pluspourlgt");
+		test_create("momolegros", "pluspourlgt", "lolilol");
+	}
+	
+	public static void test_create(String login, String mdp, String pseudo) throws JSONException, SQLException {
+		User.createUser(login, mdp, pseudo);
+	}
+	
+	public static boolean test_exists(String login, Connection c) throws SQLException {
+		return UserTools.UserLoginExists(login, c);
 	}
 }
+
