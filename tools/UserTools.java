@@ -19,7 +19,7 @@ public class UserTools {
 	}
 	
 	public static boolean insertUser(String login, String mdp, String pseudo, Connection c) throws SQLException, JSONException {
-		String requete = "INSERT INTO user values('"+login+"','"+mdp+"','"+pseudo+"');";
+		String requete = "INSERT INTO user values('"+login+"','"+mdp+"','"+pseudo+"',NULL);";
 		Statement st = c.createStatement();
 		if(st.executeUpdate(requete) == 1) {
 			return true;

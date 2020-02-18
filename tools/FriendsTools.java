@@ -9,7 +9,7 @@ public class FriendsTools {
 		ResultSet res = lecture.executeQuery(requete);
 		ArrayList<Integer> list_friends_id = new ArrayList<Integer>();
 		while(res.next()) {	
-			list_friends_id.add(res.getInt("id1"));
+			list_friends_id.add(res.getInt("id2"));
 		}
 		return list_friends_id;
 	}
@@ -30,5 +30,12 @@ public class FriendsTools {
 			return true;
 		}
 		return false;
+	}
+	
+	public static boolean is_friend(int id1, int id2, Connection c) throws SQLException {
+		String requete = "SELECT id1, id2 FROM friends WHERE id1 = "+id1+" AND id2="+id2+";";
+		Statement lecture = c.createStatement();
+		ResultSet res = lecture.executeQuery(requete);
+		return res.next();
 	}
 }

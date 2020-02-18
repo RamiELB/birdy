@@ -19,7 +19,9 @@ public class Friends {
 		if(!(UserTools.UserExists(id2, c))) {
 			return ErrorJSON.serviceRefused("Le second utilisateur n'existe pas", -1);			
 		}
-		
+		if(FriendsTools.is_friend(id1, id2, c)) {
+			return tools.ErrorJSON.serviceAccepted();
+		}
 		if(FriendsTools.add_friend(id1, id2, c)){
 			c.close();
 			return tools.ErrorJSON.serviceAccepted();
@@ -36,9 +38,7 @@ public class Friends {
 		ArrayList<Integer> list_id = FriendsTools.get_friends(id, c);
 		c.close();
 		JSONObject list_friends = new JSONObject();
-		for(int i : list_id) {
-			list_friends.put("id", i);
-		}
+		list_friends.put("amis", list_id);
 		return list_friends;
 	}
 	
