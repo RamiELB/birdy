@@ -6,4 +6,6 @@ public class DBStatic {
 	public static final String mysql_user = "root";
 	public static final String mysql_password = "root";
 	public static final String mysql_host = "localhost";
+	
+	public static final String mongo_bd = "mongophilou";
 }
