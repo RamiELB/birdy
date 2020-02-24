@@ -27,7 +27,7 @@ public class Friends {
 			return tools.ErrorJSON.serviceAccepted();
 		}
 		c.close();
-		return tools.ErrorJSON.serviceRefused("Erreur SQL", -1);
+		return tools.ErrorJSON.serviceRefused("Erreur SQL", 1000);
 	}
 	
 	public static JSONObject get_friends(int id) throws SQLException, JSONException {
@@ -49,6 +49,6 @@ public class Friends {
 			return ErrorJSON.serviceAccepted();
 		}
 		c.close();
-		return ErrorJSON.serviceRefused("Erreur SQL", -1);
+		return ErrorJSON.serviceRefused("Erreur SQL", 1000);
 	}
 }
