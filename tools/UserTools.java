@@ -11,6 +11,16 @@ public class UserTools {
 		return res.next();
 	}
 	
+	public static int UserLoginCheck(String login, String mdp, Connection c) throws SQLException {
+		String requete = "SELECT id FROM user WHERE login = '"+login+"' AND mdp = '"+mdp+"';";
+		Statement lecture = c.createStatement();
+		ResultSet res = lecture.executeQuery(requete);
+		if(res.next()) {
+			return res.getInt("id");
+		}
+		return -1;
+	}
+	
 	public static boolean UserExists(int id, Connection c) throws SQLException {
 		String requete = "SELECT login FROM user WHERE id = '"+id+"';";
 		Statement lecture = c.createStatement();

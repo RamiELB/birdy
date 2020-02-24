@@ -2,9 +2,11 @@ package services;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import bd.Database;
-import tools.UserTools;
 
+import com.mongodb.client.MongoDatabase;
+import bd.Database;
+import tools.SessionTools;
+import tools.UserTools;
 import java.sql.*;
 
 public class User {
@@ -16,18 +18,21 @@ public class User {
 		
 		Connection c = Database.getMySQLConnection();
 		
-		if(!(tools.UserTools.UserLoginExists(login, c))){
+		int id = tools.UserTools.UserLoginCheck(login, mdp, c);
+		if( id == -1){
 			return tools.ErrorJSON.serviceRefused("User does not exist", -1);
-		}
-		
-		/* A COMPLETER : INSERER LA CONNEXTION DANS LA BD */
-		
+		}	
 		c.close();
+		
+		MongoDatabase db = Database.getMongoDBConnection();
+		SessionTools.create_session(id, db);
+		
 		return tools.ErrorJSON.serviceAccepted();
 	}
 	
-	public static JSONObject logout(String id) throws JSONException, SQLException {
-		
+	public static JSONObject logout(String key) throws JSONException{
+		MongoDatabase db = Database.getMongoDBConnection();
+		SessionTools.del_session(key, db);;
 		return tools.ErrorJSON.serviceAccepted();
 	}
 	
