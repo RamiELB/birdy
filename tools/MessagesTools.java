@@ -9,12 +9,12 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class MessagesTools {
-	public static void send_msg(int idPere, String msg, int id_user, MongoDatabase db) {
+	public static void send_msg(int id_user, String idPere, String msg, MongoDatabase db) {
 		MongoCollection<Document> collectionMessages = db.getCollection("messages");
 		Document row = new Document();
 		row.append("msg", msg);
 		row.append("auteur", id_user);
-		if(idPere != -1) {
+		if(!(idPere.equals("-1"))) {
 			row.append("idPere", idPere);
 		}
 		row.append("date", new Date());

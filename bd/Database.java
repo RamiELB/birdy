@@ -6,7 +6,6 @@ import javax.sql.DataSource;
 
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoClient;
 
 
