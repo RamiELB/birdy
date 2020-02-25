@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public class Authentification extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");

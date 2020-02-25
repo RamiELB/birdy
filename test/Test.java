@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Test extends HttpServlet {
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse res)
-		throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PrintWriter writer = res.getWriter();
 		
 		writer.println("Hello World !!!");
