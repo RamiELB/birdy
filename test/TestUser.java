@@ -8,7 +8,7 @@ import bd.Database;
 
 public class TestUser {
 	public static void main(String [] args) throws JSONException, SQLException {
-		test_create("ramii", "aaaaeea", "ysososo");
+		test_create("azzzaza", "eeeee", "aaaaaaaaaa");
 		Connection c = Database.getMySQLConnection();
 		if(test_exists_log("alakazam", c)) {
 			System.out.println("Yes =)\n");
