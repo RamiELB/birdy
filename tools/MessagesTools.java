@@ -29,13 +29,17 @@ public class MessagesTools {
 		filter.append("auteur", id_user);
 		FindIterable <Document> docs = collectionMessages.find(filter);
 		JSONObject res = new JSONObject();
-		JSONObject tmp = new JSONObject();
+		JSONObject tmp;
+		int num_msg = 0;
+		ObjectId oid = new ObjectId();
 		for(Document doc : docs) {
-			ObjectId oid = (ObjectId) doc.get("_id");
+			tmp = new JSONObject();
+			oid = (ObjectId) doc.get("_id");
 			tmp.put("_id", oid.toHexString());
-			tmp.put("msg", doc.get("msg"));
+			tmp.put("id_auteur", doc.get("auteur"));
 			tmp.put("idPere", doc.get("idPere"));
-			res.put("field", tmp);
+			tmp.put("msg", doc.get("msg"));
+			res.put(Integer.toString(num_msg++), tmp);
 		}
 		return res;
 	}
