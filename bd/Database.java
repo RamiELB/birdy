@@ -29,7 +29,7 @@ public class Database {
 		return dataSource.getConnection();
 	}
 	
-	public static Connection getMySQLConnection() throws SQLException {
+	public static Connection getMySQLConnection(){
 		// si on n'utilise pas le pooling 
 		if(!DBStatic.pooling) {
 			try {
@@ -39,7 +39,13 @@ public class Database {
 				e.printStackTrace();
 			}
 			// on créer donc une nouvelle connexion
-			return DriverManager.getConnection("jdbc:mysql://"+DBStatic.mysql_host+"/"+DBStatic.mysql_db, DBStatic.mysql_user, DBStatic.mysql_password);
+			try {
+				return DriverManager.getConnection("jdbc:mysql://"+DBStatic.mysql_host+"/"+DBStatic.mysql_db, DBStatic.mysql_user, DBStatic.mysql_password);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
 			/* on notera toutefois que le port est nécéssaire si la bd n'est pas interfacer au port par défaut.
 			 *  Ainsi jdbc:mysql://"+DBStatic.mysql_host+":"+DBStatic.mysql_port+"/"+DBStatic.mysql_bd
 			 */
@@ -51,10 +57,21 @@ public class Database {
 				/* on creer l'objet Database en indiquant le nom de la 
 				 * ressource dans le fichier de context
 				 */
-				database = new Database("jdbc/db");
+				try {
+					database = new Database("jdbc/db");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			// on retourne la connexion du pooling
-			return database.getConnection();
+			try {
+				return database.getConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
 		}
 	}
 	public static MongoDatabase getMongoDBConnection()  {

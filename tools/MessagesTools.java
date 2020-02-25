@@ -23,7 +23,7 @@ public class MessagesTools {
 		collectionMessages.insertOne(row);
 	}
 	
-	public static JSONObject get_msg_user(int id_user, MongoDatabase db) throws JSONException {
+	public static JSONObject get_msg_user(int id_user, MongoDatabase db){
 		MongoCollection<Document> collectionMessages = db.getCollection("messages");
 		Document filter = new Document();
 		filter.append("auteur", id_user);
@@ -35,16 +35,20 @@ public class MessagesTools {
 		for(Document doc : docs) {
 			tmp = new JSONObject();
 			oid = (ObjectId) doc.get("_id");
-			tmp.put("_id", oid.toHexString());
-			tmp.put("id_auteur", doc.get("auteur"));
-			tmp.put("idPere", doc.get("idPere"));
-			tmp.put("msg", doc.get("msg"));
-			res.put(Integer.toString(num_msg++), tmp);
+			try {
+				tmp.put("_id", oid.toHexString());
+				tmp.put("id_auteur", doc.get("auteur"));
+				tmp.put("idPere", doc.get("idPere"));
+				tmp.put("msg", doc.get("msg"));
+				res.put(Integer.toString(num_msg++), tmp);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
 		return res;
 	}
 	
-	public static JSONObject get_replies(String idPere, MongoDatabase db) throws JSONException {
+	public static JSONObject get_replies(String idPere, MongoDatabase db){
 		MongoCollection<Document> collectionMessages = db.getCollection("messages");
 		Document filter = new Document();
 		filter.append("_id", idPere);
@@ -53,10 +57,14 @@ public class MessagesTools {
 		JSONObject tmp = new JSONObject();
 		for(Document doc : docs) {
 			ObjectId oid = (ObjectId) doc.get("_id");
-			tmp.put("_id", oid.toHexString());
-			tmp.put("msg", doc.get("msg"));
-			tmp.put("idPere", doc.get("idPere"));
-			res.put("field", tmp);
+			try {
+				tmp.put("_id", oid.toHexString());
+				tmp.put("msg", doc.get("msg"));
+				tmp.put("idPere", doc.get("idPere"));
+				res.put("field", tmp);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
 		return res;
 	}
