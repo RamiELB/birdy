@@ -16,6 +16,11 @@ public class ErrorJSON {
 	}
 	public static JSONObject serviceAccepted(){
 		JSONObject msg = new JSONObject();
+		try {
+			msg.put("err_msg", "success");
+		}catch(JSONException e) {
+			e.printStackTrace();
+		}
 		return msg;
 	}
 }

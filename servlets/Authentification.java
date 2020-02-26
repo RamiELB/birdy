@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Authentification extends HttpServlet {
 	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String mdp = request.getParameter("mdp");

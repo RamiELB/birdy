@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Sv_Friends extends HttpServlet {
        
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id1 = Integer.parseInt(request.getParameter("id1"));
 		int id2 = Integer.parseInt(request.getParameter("id2"));
